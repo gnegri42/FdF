@@ -10,18 +10,26 @@
 #                                                                              #
 # **************************************************************************** #
 
-NAME = fdf
-SRCS = main.c\
-	   ft_reader.c\
-	   ft_draw.c
-OBJS = $(SRCS:.c=.o)
-INC = libft.h\
-fdf.h\
-CC = cc
-FLAGS = -lmlx -framework OpenGl -framework AppKit
+NAME = 			fdf
 
-LIB_PATH = libft/
-LIB = libft/libft.a
+SRCS = 			main.c\
+	   			ft_reader.c\
+	   			ft_atoi_fdf.c\
+	   			ft_init_struct.c\
+	   			ft_draw.c\
+
+OBJS = 			$(SRCS:.c=.o)
+
+INC = 			libft.h\
+				fdf.h\
+
+CC = 			cc
+
+FLAGS = 		-lmlx -framework OpenGl -framework AppKit
+
+LIB_PATH = 		libft/
+
+LIB = 			libft/libft.a
 
 .PHONY: all clean fclean re
 

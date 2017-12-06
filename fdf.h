@@ -30,13 +30,9 @@
 # define GREEN 0x25FF50
 # define ORANGE 0x00FFA500
 
-typedef struct		s_fdf
+typedef struct		s_point
 {
-	void			*mlx;
-	void			*win;
 	int				**tab;
-	int				nb_line;
-	int				nb_char;
 	int				length;
 	double			x;
 	double			y;
@@ -48,9 +44,27 @@ typedef struct		s_fdf
 	int				def_zoom;
 	int				x_move;
 	int				y_move;
-}					t_fdf;
+}					t_point;
 
-int				ft_reader(int argc, char *argv, t_fdf *mlx);
-int				ft_atoi_fdf(const char *str, int *i);
+typedef struct		s_mlx
+{
+	void			*mlx;
+	void			*win;
+
+}					t_mlx;
+
+typedef struct		s_tools
+{
+	int				nb_line;
+	int				nb_char;
+	char			*str;
+	char			**content;
+
+}					t_tools;
+
+int					ft_reader(int argc, char *argv, t_tools *tools);
+int					ft_atoi_fdf(const char *str, int *c);
+void				ft_init_struct(t_tools tools, t_mlx *mlx, t_point *point);
+void				ft_draw(t_point *point, t_tools tools, t_mlx mlx);
 
 #endif
