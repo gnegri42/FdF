@@ -25,23 +25,22 @@
 # define WIN_WIDTH	1200
 # define WIN_HEIGHT	1200
 
-# define BLUE 0x0041FF
+# define BLUE 0x1E90FF
 # define WHITE 0xFFFFFF
 # define GREEN 0x25FF50
 # define ORANGE 0x00FFA500
+# define YELLOW 0xFFFF66
 
 typedef struct		s_point
 {
 	int				**tab;
 	int				length;
-	double			x;
-	double			y;
 	double			z;
-	double			x1;
-	double			x2;
-	double			y1;
-	double			y2;
-	int				def_zoom;
+	int				x1;
+	int				x2;
+	int				y1;
+	int				y2;
+	int				zoom;
 	int				x_move;
 	int				y_move;
 }					t_point;
@@ -56,7 +55,7 @@ typedef struct		s_mlx
 typedef struct		s_tools
 {
 	int				nb_line;
-	int				nb_char;
+	int				nb_int;
 	char			*str;
 	char			**content;
 
@@ -64,7 +63,7 @@ typedef struct		s_tools
 
 int					ft_reader(int argc, char *argv, t_tools *tools);
 int					ft_atoi_fdf(const char *str, int *c);
-void				ft_init_struct(t_tools tools, t_mlx *mlx, t_point *point);
 void				ft_draw(t_point *point, t_tools tools, t_mlx mlx);
+int					ft_check_errors(char *str);
 
 #endif

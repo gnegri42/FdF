@@ -15,8 +15,8 @@ NAME = 			fdf
 SRCS = 			main.c\
 	   			ft_reader.c\
 	   			ft_atoi_fdf.c\
-	   			ft_init_struct.c\
 	   			ft_draw.c\
+	   			ft_check_errors.c\
 
 OBJS = 			$(SRCS:.c=.o)
 

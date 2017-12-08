@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "libft.h"
-#include "get_next_line.h"
 
 static int		ft_is_line(char **str, char **line)
 {

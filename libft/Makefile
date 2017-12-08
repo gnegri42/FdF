@@ -93,11 +93,11 @@ $(NAME) :
 
 clean :
 	@rm -rf $(OBJS)
-	@echo "\033[1;91m$(OBJS) removed !\033[0m"
+	@echo "\033[1;91mLibft removed !\033[0m"
 
 fclean : clean
 	@rm -rf $(NAME)
-	@echo "\033[1;91m$(NAME) removed !\033[0m"
+	@echo "\033[1;91mDone !\033[0m"
 
 re : fclean all
 

@@ -13,58 +13,59 @@
 #include "fdf.h"
 #include <stdio.h>
 
-int         **ft_new_tab(char **content, char *str, int nb_line, int nb_char)
+int			**ft_new_tab(char *str, int nb_line, int nb_int)
 {
-    int     i;
-    int     j;
-    int     k;
-    int		c;
-    int     **tab;
+	int		i;
+	int		j;
+	int		k;
+	int		**tab;
 
-    j = 0;
-    k = 0;
-    if (!(tab = (int **)malloc(sizeof(int *) * nb_line)))
-        return (NULL);
-    while (content[j] != 0)
-    {
-        i = 0;
-        if (!(tab[j] = (int *)malloc(sizeof(int) * (ft_strlen(content[1]) / 2 + 1))))
-            return (NULL);
-        while (content[j][i] != '\0')
-        {
-            //tab[j][k] = ft_atoi_fdf(str, &c);
-            while (content[j][i] == ' ')
-            {
-                i++;
-                c++;
-            }
-            i++;
-            k++;
-        }
-        c++;
-        j++;
-    }
-    return (tab);
+	j = 0;
+	k = 0;
+	if (!(tab = (int **)malloc(sizeof(int *) * nb_line)))
+		return (NULL);
+	while (str[k] != '\0' && j < nb_line)
+	{
+		i = 0;
+		if (!(tab[j] = (int *)malloc(sizeof(int) * nb_int)))
+			return (NULL);
+		while (str[k] != '\n' && str[k] != '\0' && j < nb_line)
+		{
+			tab[j][i++] = ft_atoi_fdf(str, &k);
+			while (str[k] == ' ')
+				k++;
+		}
+		k++;
+		j++;
+	}
+	return (tab);
 }
 
-t_point		ft_init(char **content, char *str, int nb_line, int nb_char)
+t_point		ft_init(char **content, char *str, int nb_line, int nb_int)
 {
-    t_point point;
-    
-    point.z = 2.0;
-    point.tab = ft_new_tab(content, str, nb_line, nb_char);
-    if (nb_line >= nb_char)
-        point.def_zoom = 400 / nb_line;
-    else
-        point.def_zoom = 400 / nb_char;
-    return (point);
+	t_point point;
+
+	point.z = 2.0;
+	point.tab = ft_new_tab(str, nb_line, nb_int);
+	if (nb_line >= nb_int)
+		point.zoom = WIN_HEIGHT / (nb_line * 2);
+	else
+		point.zoom = WIN_WIDTH / (nb_int * 2);
+	return (point);
 }
 
-int     ft_escape(int keycode, void *param)
+int		ft_escape(int keycode, t_mlx mlx, t_tools tools, t_point *point)
 {
-    if (keycode == 53)
-        exit(1);
-    return (0);
+	if (keycode == 53)
+		exit(1);
+	if (keycode == 13)
+	{
+		point->zoom = point->zoom + 20;
+		mlx_clear_window(mlx.mlx, mlx.win);
+		ft_draw(&point, tools, mlx);
+	}
+	printf("%d\n", keycode);
+	return (0);
 }
 
 int		main(int argc, char **argv)
@@ -80,23 +81,13 @@ int		main(int argc, char **argv)
 	j = 0;
 
 	tools.nb_line = 0;
-	ft_reader(argc, argv[1], &tools);
+	if (ft_reader(argc, argv[1], &tools) != 1)
+		exit(1);
 	mlx.mlx = mlx_init();
 	mlx.win = mlx_new_window(mlx.mlx, WIN_WIDTH, WIN_HEIGHT, "win fdf");
-	point = ft_init(tools.content, tools.str, tools.nb_line, tools.nb_char);
-	/*while (tools.content[j] != 0)
-	{
-		i = 0;
-		while (tools.content[j][i] != '\0')
-		{
-			printf("%d", point.tab[j][i]);
-			i++;
-		}
-		printf("\n");
-		j++;
-	}*/
+	point = ft_init(tools.content, tools.str, tools.nb_line, tools.nb_int);
 	ft_draw(&point, tools, mlx);
-	mlx_key_hook(mlx.win, ft_escape, 0);
+	mlx_key_hook(mlx.win, ft_escape, mlx, tools, &point);
 	mlx_loop(mlx.mlx);
 	return 0;
 }
