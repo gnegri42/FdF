@@ -17,6 +17,7 @@ SRCS = 			main.c\
 	   			ft_atoi_fdf.c\
 	   			ft_draw.c\
 	   			ft_check_errors.c\
+	   			ft_key_events.c\
 
 OBJS = 			$(SRCS:.c=.o)
 

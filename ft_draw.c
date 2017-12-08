@@ -85,11 +85,11 @@ void ft_draw_line(t_mlx mlx, t_point point, int z)
 	{
 		x = point.x1 + (dx * tx);
 		y = point.y1 + (dy * tx);
-		if (z > 0)
-			mlx_pixel_put(mlx.mlx, mlx.win, x, y, ORANGE);
-		else if (z > 5)
+		if (z > 5)
 			mlx_pixel_put(mlx.mlx, mlx.win, x, y, YELLOW);
-		else if (z == 0)
+		else if (z > 2)
+			mlx_pixel_put(mlx.mlx, mlx.win, x, y, ORANGE);
+		else if (z > 0)
 			mlx_pixel_put(mlx.mlx, mlx.win, x, y, WHITE);
 		else
 			mlx_pixel_put(mlx.mlx, mlx.win, x, y, BLUE);
@@ -104,13 +104,13 @@ void	ft_segment_horiz(t_mlx mlx, t_point point, int x, int y)
 	int zoom;
 
 	zoom = point.zoom;
-	startx = WIN_WIDTH / 2;
-	starty = WIN_HEIGHT / 2;
+	startx = point.x_move;
+	starty = point.y_move;
 	point.x1 = startx + (x - y) * zoom;
 	// Le 8 sert à monter/descendre la caméra et le 40 sert à s'approcher/s'écarter
-	point.y1 = starty + (x + y) * zoom / 8 - (point.tab[y][x] * 20);
+	point.y1 = starty + (x + y) * zoom / point.z - (point.tab[y][x] * 20);
 	point.x2 = startx + ((x + 1) - y) * zoom;
-	point.y2 = starty + ((x + 1) + y ) * zoom / 8 - (point.tab[y][x + 1] * 20);
+	point.y2 = starty + ((x + 1) + y ) * zoom / point.z - (point.tab[y][x + 1] * 20);
 	ft_draw_line(mlx, point, point.tab[y][x]);
 }
 
@@ -121,12 +121,12 @@ void	ft_segment_vert(t_mlx mlx, t_point point, int x, int y)
 	int zoom;
 
 	zoom = point.zoom;
-	startx = WIN_WIDTH / 2;
-	starty = WIN_HEIGHT / 2;
+	startx = point.x_move;
+	starty = point.y_move;
 	point.x1 = startx + (x - y) * zoom;
-	point.y1 = starty + (x + y) * zoom / 8 - (point.tab[y][x] * 20);
+	point.y1 = starty + (x + y) * zoom / point.z - (point.tab[y][x] * 20);
 	point.x2 = startx + (x - (y + 1)) * zoom;
-	point.y2 = starty + (x + (y + 1)) * zoom / 8 - (point.tab[y + 1][x] * 20);
+	point.y2 = starty + (x + (y + 1)) * zoom / point.z - (point.tab[y + 1][x] * 20);
 	ft_draw_line(mlx, point, point.tab[y][x]);
 }
 

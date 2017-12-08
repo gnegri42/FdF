@@ -36,6 +36,8 @@ typedef struct		s_point
 	int				**tab;
 	int				length;
 	double			z;
+	int				x;
+	int				y;
 	int				x1;
 	int				x2;
 	int				y1;
@@ -44,13 +46,6 @@ typedef struct		s_point
 	int				x_move;
 	int				y_move;
 }					t_point;
-
-typedef struct		s_mlx
-{
-	void			*mlx;
-	void			*win;
-
-}					t_mlx;
 
 typedef struct		s_tools
 {
@@ -61,9 +56,20 @@ typedef struct		s_tools
 
 }					t_tools;
 
+typedef struct		s_mlx
+{
+	void			*mlx;
+	void			*win;
+	t_point			*point;
+	t_tools			*tools;
+
+}					t_mlx;
+
 int					ft_reader(int argc, char *argv, t_tools *tools);
 int					ft_atoi_fdf(const char *str, int *c);
 void				ft_draw(t_point *point, t_tools tools, t_mlx mlx);
 int					ft_check_errors(char *str);
+int					ft_key_events(int keycode, t_mlx *mlx);
+int					ft_expose_hook(t_mlx *mlx);
 
 #endif
