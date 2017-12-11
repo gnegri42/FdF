@@ -12,28 +12,6 @@
 
 #include "fdf.h"
 
-static int	ft_check_hexadecimal(char *str, int i, int num, int start)
-{
-	if (str[i - 1] < '0' || str[i - 1] > '9')
-		return (-1);
-	i++;
-	if (str[i] != '0' || str[i + 1] != 'x' || str[num] != ' ')
-		return (-1);
-	i += 2;
-	while (i < num)
-	{
-		if ((str[i] < '0' || str[i] > '9') && (str[i] < 'A' || str[i] > 'F'))
-			return (-1);
-		i++;
-	}
-	while (start < num)
-	{
-		str[start] = ' ';
-		start++;
-	}
-	return (1);
-}
-
 static int	ft_start_error(char *str)
 {
 	int		i;
@@ -43,7 +21,7 @@ static int	ft_start_error(char *str)
 	{
 		if ((str[i] < '0' || str[i] > '9') && str[i] != '-' && str[i] != ' ')
 		{
-			ft_putstr_fd("lines must start by a digit or space : ", 2);
+			ft_putstr("lines must start by a digit or space : ");
 			return (-1);
 		}
 		while (str[i] != '\n' && str[i] != '\0')
@@ -59,23 +37,15 @@ static int	ft_invalid(char *str, int i)
 	{
 		if (str[i] == '-' && (str[i + 1] < '0' || str[i + 1] > '9'))
 		{
-			ft_putstr_fd(
-					"'-' must be followed only by a digit : ", 2);
+			ft_putstr(
+					"'-' must be followed only by a digit : ");
 			return (-1);
 		}
 		if (str[i] != '-' && str[i] != ' ' && str[i] != '\n'
 			&& !(str[i] >= '0' && str[i] <= '9'))
 		{
-			if (str[i] == ',' && ft_check_hexadecimal(str, i, i + 9, i) == -1)
-			{
-				ft_putstr_fd("hexadecimal : ", 2);
-				return (-1);
-			}
-			else
-			{
-				ft_putstr_fd("bad character in file : ", 2);
-				return (-1);
-			}
+			ft_putstr("bad character in file : ");
+			return (-1);
 		}
 		i++;
 	}
@@ -89,7 +59,7 @@ int			ft_check_errors(char *str)
 	i = 0;
 	if (str[0] == '\0')
 	{
-		ft_putstr_fd("file is empty : ", 2);
+		ft_putstr("file is empty : ");
 		return (0);
 	}
 	while (str[i] != '\0')

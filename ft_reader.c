@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 static int			ft_strlen_fdf(char *str)
 {

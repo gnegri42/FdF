@@ -11,7 +11,6 @@
 /* ************************************************************************** */
 
 #include "fdf.h"
-#include <stdio.h>
 
 static int			**ft_new_tab(char *str, int nb_line, int nb_int)
 {
