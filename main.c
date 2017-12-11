@@ -13,7 +13,7 @@
 #include "fdf.h"
 #include <stdio.h>
 
-int			**ft_new_tab(char *str, int nb_line, int nb_int)
+static int			**ft_new_tab(char *str, int nb_line, int nb_int)
 {
 	int		i;
 	int		j;
@@ -41,7 +41,7 @@ int			**ft_new_tab(char *str, int nb_line, int nb_int)
 	return (tab);
 }
 
-t_point		ft_init(char **content, char *str, int nb_line, int nb_int)
+static t_point		ft_init(char **content, char *str, int nb_line, int nb_int)
 {
 	t_point point;
 
@@ -56,17 +56,11 @@ t_point		ft_init(char **content, char *str, int nb_line, int nb_int)
 	return (point);
 }
 
-int		main(int argc, char **argv)
+int					main(int argc, char **argv)
 {
-	t_mlx	mlx;
-	t_tools	tools;
-	t_point	point;
-
-	int i;
-	int j;
-
-	i = 0;
-	j = 0;
+	t_mlx		mlx;
+	t_tools		tools;
+	t_point		point;
 
 	tools.nb_line = 0;
 	if (ft_reader(argc, argv[1], &tools) != 1)
@@ -79,5 +73,5 @@ int		main(int argc, char **argv)
 	ft_expose_hook(&mlx);
 	mlx_key_hook(mlx.win, ft_key_events, &mlx);
 	mlx_loop(mlx.mlx);
-	return 0;
+	return (0);
 }

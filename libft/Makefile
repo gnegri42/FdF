@@ -79,25 +79,22 @@ OBJS =		$(FILES:.c=.o)
 
 CC =		gcc
 
-FLAGS =		-Wall -Werror -Wextra
+FLAGS =		-Wall -Werror -Wextra -ggdb
 
 .PHONY: all clean fclean re
 
 all: $(NAME)
 
 $(NAME) :
-	@echo "\033[1;91mCompilation...\033[0m"
 	@$(CC) $(FLAGS) -c $(SRCS)
 	@ar rc $(NAME) $(OBJS)
-	@echo "\033[1;91mCompilation complete !\033[0m" 
+	@echo "\033[1;91mCompilation libft complete !\033[0m" 
 
 clean :
 	@rm -rf $(OBJS)
-	@echo "\033[1;91mLibft removed !\033[0m"
 
 fclean : clean
 	@rm -rf $(NAME)
-	@echo "\033[1;91mDone !\033[0m"
 
 re : fclean all
 

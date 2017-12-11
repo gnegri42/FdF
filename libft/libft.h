@@ -26,6 +26,14 @@ typedef struct		s_list
 	struct s_list	*next;
 }					t_list;
 
+typedef struct		s_gnl
+{
+	char			*text;
+	char			*tempo;
+	struct s_gnl	*next;
+	int				fd;
+}					t_gnl;
+
 void				*ft_memset(void *b, int c, size_t len);
 void				ft_bzero(void *s, size_t n);
 void				*ft_memcpy(void *dst, const void *src, size_t n);

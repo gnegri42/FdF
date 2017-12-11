@@ -13,10 +13,10 @@
 #include "fdf.h"
 #include <stdio.h>
 
-int			ft_expose_hook(t_mlx *mlx)
+int				ft_expose_hook(t_mlx *mlx)
 {
-	int	x;
-	int	y;
+	int			x;
+	int			y;
 
 	x = 30;
 	y = 40;
@@ -36,7 +36,7 @@ int			ft_expose_hook(t_mlx *mlx)
 	return (0);
 }
 
-int		ft_zoom_in_out(int keycode, t_mlx *mlx)
+static int		ft_zoom_in_out(int keycode, t_mlx *mlx)
 {
 	if (keycode == 13 && ((mlx->point->zoom) * 2 < 1000))
 	{
@@ -53,7 +53,7 @@ int		ft_zoom_in_out(int keycode, t_mlx *mlx)
 	return (0);
 }
 
-int		ft_move(int keycode, t_mlx *mlx)
+static int		ft_move(int keycode, t_mlx *mlx)
 {
 	if (keycode == 123)
 	{
@@ -82,7 +82,7 @@ int		ft_move(int keycode, t_mlx *mlx)
 	return (0);
 }
 
-int		ft_zoom_up_down(int keycode, t_mlx *mlx)
+static int		ft_zoom_up_down(int keycode, t_mlx *mlx)
 {
 	if (keycode == 2)
 	{
@@ -99,7 +99,7 @@ int		ft_zoom_up_down(int keycode, t_mlx *mlx)
 	return (0);
 }
 
-int		ft_key_events(int keycode, t_mlx *mlx)
+int				ft_key_events(int keycode, t_mlx *mlx)
 {
 	if (keycode == 53)
 		exit(1);

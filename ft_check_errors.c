@@ -63,8 +63,8 @@ static int	ft_invalid(char *str, int i)
 					"'-' must be followed only by a digit : ", 2);
 			return (-1);
 		}
-		if (str[i] != '-' && str[i] != ' ' && str[i] != '\n'\
-				&& !(str[i] >= '0' && str[i] <= '9'))
+		if (str[i] != '-' && str[i] != ' ' && str[i] != '\n'
+			&& !(str[i] >= '0' && str[i] <= '9'))
 		{
 			if (str[i] == ',' && ft_check_hexadecimal(str, i, i + 9, i) == -1)
 			{
@@ -82,7 +82,7 @@ static int	ft_invalid(char *str, int i)
 	return (1);
 }
 
-int		ft_check_errors(char *str)
+int			ft_check_errors(char *str)
 {
 	int		i;
 
