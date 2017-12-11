@@ -51,26 +51,6 @@ static int			ft_verif_int_nb(t_tools *tools)
 	return (1);
 }
 
-static int			ft_check_read(int argc, char *argv, int *fd)
-{
-	if (argc < 2)
-	{
-		ft_putstr("usage: ./fdf input_file\n");
-		return (0);
-	}
-	if ((*fd = open(argv, O_RDONLY)) < 0)
-	{
-		ft_putstr("bad_file : error\n");
-		return (0);
-	}
-	if (BUFF_SIZE <= 0)
-	{
-		ft_putstr("BUFF_SIZE : error\n");
-		return (0);
-	}
-	return (1);
-}
-
 static int			ft_verifs(int fd, t_tools *tools, char *line)
 {
 	if (get_next_line(fd, &line) < 0)
@@ -86,6 +66,26 @@ static int			ft_verifs(int fd, t_tools *tools, char *line)
 		ft_putstr("error\n");
 		free(tools->content);
 		free(tools->str);
+		return (0);
+	}
+	return (1);
+}
+
+static int			ft_check_read(int argc, char *argv, int *fd)
+{
+	if (argc < 2)
+	{
+		ft_putstr("usage: ./fdf input_file\n");
+		return (0);
+	}
+	if ((*fd = open(argv, O_RDONLY)) < 0)
+	{
+		ft_putstr("bad_file : error\n");
+		return (0);
+	}
+	if (BUFF_SIZE <= 0)
+	{
+		ft_putstr("BUFF_SIZE : error\n");
 		return (0);
 	}
 	return (1);
@@ -112,8 +112,8 @@ int					ft_reader(int argc, char *argv, t_tools *tools)
 		free(line);
 	}
 	tools->content = ft_strsplit(tools->str, '\n');
-	tools->nb_int = ft_strlen_fdf(tools->content[0]);
 	if (ft_verifs(fd, tools, line) == 0)
 		return (0);
+	tools->nb_int = ft_strlen_fdf(tools->content[0]);
 	return (1);
 }

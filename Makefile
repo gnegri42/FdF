@@ -24,7 +24,7 @@ OBJS = 			$(SRCS:.c=.o)
 INC = 			libft.h\
 				fdf.h\
 
-CC = 			cc
+CC = 			gcc
 
 FLAGS = 		-lmlx -framework OpenGl -framework AppKit
 

@@ -63,7 +63,7 @@ int					main(int argc, char **argv)
 
 	tools.nb_line = 0;
 	if (ft_reader(argc, argv[1], &tools) != 1)
-		exit(1);
+		return (1);
 	mlx.point = &point;
 	mlx.tools = &tools;
 	mlx.mlx = mlx_init();

@@ -29,9 +29,9 @@ typedef struct		s_list
 typedef struct		s_gnl
 {
 	char			*text;
-	char			*tempo;
-	struct s_gnl	*next;
+	char			*temp;
 	int				fd;
+	struct s_gnl	*next;
 }					t_gnl;
 
 void				*ft_memset(void *b, int c, size_t len);

@@ -29,7 +29,7 @@ static t_gnl	*ft_create_list(int fd)
 	if (!(list = (t_gnl*)malloc(sizeof(*list))))
 		return (NULL);
 	list->fd = fd;
-	list->tempo = ft_strnew(0);
+	list->temp = ft_strnew(0);
 	list->text = NULL;
 	list->next = NULL;
 	return (list);
@@ -92,7 +92,7 @@ int				get_next_line(const int fd, char **line)
 	if (fd == -1 || line == NULL || BUFF_SIZE <= 0)
 		return (-1);
 	tmp = ft_check_fd(save, fd);
-	while (!(ft_strchr(tmp->tempo, '\n')))
+	while (!(ft_strchr(tmp->temp, '\n')))
 	{
 		ret = read(fd, buf, BUFF_SIZE);
 		if (ret == -1)
@@ -100,9 +100,9 @@ int				get_next_line(const int fd, char **line)
 		if (ret == 0)
 			return (ft_check(tmp->text, line));
 		buf[ret] = '\0';
-		tmp->text = ft_strjoin(tmp->tempo, buf);
-		free(tmp->tempo);
-		tmp->tempo = tmp->text;
+		tmp->text = ft_strjoin(tmp->temp, buf);
+		free(tmp->temp);
+		tmp->temp = tmp->text;
 	}
 	return (ft_check(tmp->text, line));
 }
